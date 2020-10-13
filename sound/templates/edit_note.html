@@ -1,0 +1,37 @@
+{% extends 'base.html' %} {% block content %}
+<div class="page-wrapper2"></div>
+<div class="header title">
+    Editing Note
+</div>
+
+<div id="form-content">
+    <form method="post">{% csrf_token %}
+        <div id="description-title">
+            Notes
+        </div>
+        <div id="description-box">
+            {{form.note_description}}
+        </div>
+
+        <div id="highligh-box">
+            {{form.highlight}} Highlight
+        </div>
+        <div id="button-bar">
+            <input type="submit" value="Update" class="button">
+            <a class="button" onclick="goBack()">Go back</a>
+        </div>
+    </form>
+</div>
+</div>
+
+<div>
+
+</div>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+{% endblock %}

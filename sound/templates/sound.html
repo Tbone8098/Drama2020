@@ -1,0 +1,72 @@
+{% extends 'base.html' %}{% block content %}
+
+
+<div class="page-wrapper">
+    <div class="upper_header">
+        <img src="static/sound/img/logo3.png" alt="logo" id="tk-logo">
+        <h1 class="main-title">Not So Terrible Parable</h1>
+        <p id="funny-saying">Break a leg</p>
+    </div>
+
+    <div class="header">
+        <!-- <img src="static/sound/img/Dashboard.png" alt="sound dashboard" id="image"> -->
+        <div class="title" id="box1"> Script </div>
+        <div class="title" id="box2"> Sound </div>
+        <div class="title" id="box3"> Notes </div>
+    </div>
+
+    <div class="content">
+        <table>
+            {% for line in line_actual %} {% if line.highlight == True %}
+            <tr class="data-table highlight">
+                {% else %}
+                <tr class="data-table">
+                    {% endif %}
+
+                    <td id="data-script">
+                        <div id="script-section-1"> {{ line.number }}</div>
+                        <div id="{{ line.label }}"> {{ line.label }} </div>
+                        <div id="script-section-3"> {{ line.spoken_line }} </div>
+                    </td>
+                    <td id="data-sound">
+                        {% if line.audio_name != '' %}
+                        <audio src="static/sound/audio/{{line.audio_name}}.mp3" id="player{{ line.number }}" controls preload="metadata"> </audio> {% endif %}
+                    </td>
+                    <td id="data-notes">
+
+                        {{ line.note_description }}
+                        <a href="{% url 'update_script' line.pk %}">
+                            <img src="static/sound/img/edit2.png" alt="edit button" class="button" id="editbutton"></a>
+
+                    </td>
+                </tr>
+                {% endfor %}
+        </table>
+    </div>
+    <!-- content END -->
+
+    <div class="navbar">
+        <h3>Scenes</h3>
+        <ul>
+            {% for line in line_actual %} {% if line.new_scene == True %}
+            <li><a href="#{{ line.label }}" class="button">Scene {{ line.scene_number }}</a></li>
+            {% endif %} {% endfor %}
+
+
+        </ul>
+    </div>
+    <div class="footer">
+        <img src="static/sound/img/logo.png" alt="logo" id="tk-logo-footer">
+        <div id="footer-text">
+            T&K Original
+        </div>
+        <br>
+        <p id="funny-saying">
+            Is it broken?
+        </p>
+
+    </div>
+</div>
+<!-- Page-wrapper END-->
+
+{% endblock %}
